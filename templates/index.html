@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./static/CSS/style.css">
+    <title>WiseTranslator</title>
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">WiseTranslator</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a href="#" class="nav-item nav-link">About</a>
+                    <a href="#" class="nav-item nav-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="lower-div">  
+        <form class="myform" id="myform" action="{{ url_for('onSubmitClick') }}" method="post">
+            <select id="selector" onchange="dropdownChange()" name="langSelection"> <!-- Use "select" to create object -->
+                <option id="EtoU" value="1" >English to Urdu</option>
+                <option id="UtoE" value="2" >Urdu to English</option>
+            </select>
+            <div class="upperDiv">
+                <div class="leftSide column" id="left-input-div">
+                    <div class="left-up">
+                        <h1 class="left-heading">
+                            English
+                        </h1>
+                    </div>
+                    <div class="left-down">
+                        <textarea type="text" name="EngInput" class="english-text-input" id="english-input" placeholder="english">{{ eng }}</textarea>
+                    </div>
+                </div>
+
+                <div class="rightSide column" id="right-input-div">
+                    <div class="right-up">
+                        <h1 class="right-heading">
+                            اردو
+                        </h1>
+                    </div>
+                    <div class="right-down">
+                        <textarea disabled type="text" name="UrdInput" class="urdu-text-input" id="urdu-input"  placeholder="انگریزی">{{ urd }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="lowerDiv">
+                <div class="button-div">
+                    <input type="submit" id="translateBtn" class="translate-button" value="Translate">
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    <script type="text/javascript" src="./static/JS/index.js" ></script>
+</body>
+</html>
