@@ -45,11 +45,22 @@ def translate_sentence(sentence, model, opt, SRC, TRG):
 
 
 def translate(opt, model, SRC, TRG):
-    sentences = opt.text.lower().split('.')
+    sentences=[]
+    deli='.'
+    if(opt.src_lang=='en'):
+        sentences = opt.text.lower().split('.')
+        
+    elif(opt.src_lang=='ur'):
+        sentences = opt.text.lower().split(chr(1748))
+        deli=chr(1748)
+        
     translated = []
-
+    print(sentences)
     for sentence in sentences:
-        translated.append(translate_sentence(sentence + '.', model, opt, SRC, TRG).capitalize())
+        if(not(sentence and sentence.strip())):
+            pass
+        else:
+            translated.append(translate_sentence(sentence + deli, model, opt, SRC, TRG).capitalize())
 
     return ' '.join(translated)
 
@@ -59,7 +70,7 @@ def loadETUModels():
     Hparameters1= HyperParameters(src_data="data/Eng12.txt", trg_data="data/Urd12.txt",
                                   load_weights="weightsETU", k=3,max_strlen=100, d_model=512,
                                   n_layers=6, src_lang="en",trg_lang="ur", heads=8,
-                                  dropout=0.1)
+                                  dropout=0.3)
 
     Hparameters1.device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -74,10 +85,10 @@ def loadETUModels():
 def loadUTEModels():
     print("Loading UrduTOEnglish Model...")
     global Hparameters2 
-    Hparameters2= HyperParameters(src_data="data/Urd12.txt", trg_data="data/Eng12.txt",
+    Hparameters2= HyperParameters(src_data="data/UrdT2.txt", trg_data="data/EngT2.txt",
                                   load_weights="weightsUTE", k=3,max_strlen=100, d_model=512,
                                   n_layers=6, src_lang="ur",trg_lang="en", heads=8,
-                                  dropout=0.1)
+                                  dropout=0.3)
 
     Hparameters2.device = "cuda" if torch.cuda.is_available() else "cpu"
 
